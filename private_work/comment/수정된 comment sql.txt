@@ -1,0 +1,10 @@
+CREATE TABLE go_comment (
+	cmt_num int(8) auto_increment,
+	com_cont varchar(100) NOT NULL,
+	com_lev int(8) NOT NULL DEFAULT 1,
+	com_group int(8) NOT NULL,
+	brd_num int(8) NOT NULL,
+	mem_id varchar(50) NOT NULL,
+	com_regdate timestamp NOT NULL DEFAULT now(),
+	primary key(cmt_num)
+);
