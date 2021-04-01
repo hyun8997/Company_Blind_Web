@@ -1,0 +1,7 @@
+go_member 기본 기능
+insert : (mem_id, mem_pwd, mem_email, mem_age_range, mem_birth, mem_gender, mem_phone, mem_level, mem_name, com_name) NOT NULL임
+update : mem_pwd, mem_email, mem_phone만 변경 가능, mem_id는 PK고 검색 조건이라 변경 불가
+delete
+맴버 조회 : String mem_id로 제한
+전체 조회
+전체 조회 by 회사 : String com_name으로 제한
