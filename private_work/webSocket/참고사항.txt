@@ -1,0 +1,9 @@
+https://teqoo.tistory.com/2				websocket:handlers 빨간줄 해결
+
+https://hoon2kc.tistory.com/entry/websocket-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%95%8C%EB%A6%BC		지금 막 시도중
+https://bloodfinger.tistory.com/40		그냥 참고만, 안써봄
+http://commons.apache.org/proper/commons-lang/javadocs/api-release/src-html/org/apache/commons/lang3/StringUtils.html#line.3583	위에꺼에서 쓰는 StringUtils 파일, 아파치 커먼 프로젝트
+https://cmelcmel.tistory.com/104		참고했음, 1번째
+
+https://niceman.tistory.com/109	헤더 함수 설정 도움
+https://the-greatest-developer.tistory.com/22	구현시 도움 많이 됨
