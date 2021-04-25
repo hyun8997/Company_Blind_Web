@@ -47,12 +47,87 @@ CREATE TABLE go_board_company_table (
 );
 
 // DROP TABLE go_liked;
-=============== 좋아요 수정 ================
 CREATE TABLE liketo(
     likeno                      int    NOT NULL PRIMARY KEY, 
     brd_num                         int    NOT NULL,    
     mem_id                             varchar(50)    NOT NULL,
     like_check                        int   DEFAULT 0 NULL
 );
+
+
+----------------------------------------------------------------------------
+계층형 쿼리 작성
+
+-- DROP FUNCTION IF EXISTS comment_hierarchi;
+-- DELIMITER $$
+
+-- CREATE FUNCTION  comment_hierarchi() RETURNS INT
+-- NOT DETERMINISTIC
+-- READS SQL DATA
+-- BEGIN
+--     DECLARE v_id INT;
+--     DECLARE v_parent INT;   
+--     DECLARE CONTINUE HANDLER FOR NOT FOUND SET @id = NULL;
+--  
+--     SET v_parent = @id;
+--     SET v_id = -1;
+--  
+--     IF @id IS NULL THEN
+--         RETURN NULL;
+--     END IF;
+--  
+--     LOOP
+--    
+--     SELECT MIN(cmt_num)
+--       INTO @id
+--       FROM go_comment
+--      WHERE com_group = v_parent
+--        AND cmt_num > v_id;
+--  
+--     IF (@id IS NOT NULL) OR (v_parent = @start_with) THEN
+--        SET @level = @level + 1;
+--     RETURN @id;
+--     END IF;
+--    
+--     SET @level := @level - 1;
+--  
+--     SELECT cmt_num, com_group
+--       INTO v_id , v_parent
+--         FROM go_comment
+--        WHERE cmt_num = v_parent;
+--     END LOOP;
+-- END $$
+-- DELIMITER ;
+
+
+
+
+
+SELECT ani.cmt_num
+, CASE WHEN LEVEL-1 > 0 then CONCAT(CONCAT(REPEAT('    ', level  - 1),'┗'), ani.com_cont)
+              ELSE ani.com_cont
+        END AS com_cont
+  , fnc.level AS com_lev
+  , ani.com_group
+  , ani.brd_num
+  , ani.mem_id
+  , ani.com_regdate
+FROM
+  (SELECT comment_hierarchi() AS id, @level AS level
+     FROM (SELECT @start_with:=0, @id:=@start_with, @level:=0) vars
+       JOIN go_comment
+      WHERE @id IS NOT NULL) fnc
+JOIN go_comment ani ON fnc.id = ani.cmt_num
+where brd_num = #{brd_num}
+
+
+
+
+
+
+
+
+
+
 
 
